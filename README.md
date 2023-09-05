@@ -1,4 +1,4 @@
-# os_dev
+# A very basic operating system
 This is my senior capstone, I will be researching how a basic operating system works. 
 Because it is my capstone, I will be writing it in my preferred language, Rust. That being said, most traditional operating systems are built for C or in *fancier cases* C++
 
@@ -16,3 +16,8 @@ Because it is my capstone, I will be writing it in my preferred language, Rust. 
     - [ ] User interaction
     - [ ] File system reader
     - [ ] User executable programs, similar to `cat` and `ls`
+
+
+## Sources
+1. [OS Dev Wiki] (https://wiki.osdev.org/Main_Page)
+2. [Pillipp Opperman's "Writing an OS in Rust" Blog](https://os.phil-opp.com/) 
