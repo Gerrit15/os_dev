@@ -1,0 +1,16 @@
+two contigous memory alloc modes: 
+  - fixed size, you have a block of 16kb, a block of 32kb, etc, and it does not change
+  - variable partitioning scheme, where you have a big ole block of memory that gets allocated as memory comes in. For example, you have 64kb, and if a 8kb program comes in it gets 8kb
+
+fixed size issues: 
+  - the sizes are not dynamic
+  - if for example you had a process that requires 3kb but only a 16kb block is open, then you have 13kb unused, unusable RAM
+  - this unused memory is called internal fragmentation. it's allocated but unused space
+  - 
+
+variable size issues: 
+  - pro: no internal fragmentation => no lost memory
+  - however it can have external fragmentation, where if a block uses 2kb, and another uses 8kb, then if the 2kb is freed but a 4kb program comes in, it can't fit in the 2kb hole, thus causing external fragmentation. 
+  - external fragmentation is square peg round hole situation. which is a problem, debatably more insidious
+
+using Casey Cole's OS video series
