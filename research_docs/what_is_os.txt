@@ -1,0 +1,20 @@
+What is an operating system?
+A shockingly subtle question who's answer lies in the fundimental nature of what a computer is.
+A computer, for all intents and purposes, is a circuit that can be rewritten as many times as you desire. It exists as Turing's archetypical machine, a head and a tape.
+While a light switch might be able to turn on a light faster then a computer can turn on it's backlight, the CPU's strength comes from also being able to do whatever you desire, alongside that light.
+But to make this happen, it needs something to manage it's hardware. A computer does not exist solely in a space of theory and magic, it has physical components that need to be managed.
+First and most important to an OS's purpose is hardware management. It is extremely unsafe to have random executables directly manage hardware, just imagine if malware was able to directly control your computer's temperature, simply lighting the poor machine on fire. 
+So the operating system exists as a sort of firewall between userspace and hardware, allowing API access but not direct access.
+Second, an operating system launches initial programs. For example, on my linux system, -after many other complicated things happen- it launches a program called lightdm, which creates a welcome menu for me, which itself launches my desktop.
+
+What is a bootloader?
+When a given cpu is inserted with a given disk (in olden times) it doesn't know where to start. So it was given a starting point: the first 512 bits of a disk are called the bootloader, and the bootloader jumpstarts the rest of the OS. 
+From there, a BIOS is initialized, a Basic In/Out System. The purpose of a BIOS is to set the computer up so it can enter higher modes of operation.
+When BIOS is first initialized, it enters what is called Real Mode. Real mode is the basic entrypoint of all x86 CPUs, and is extremely limited. 
+It is only 16 bit, as opposed to "protected mode"'s upwards of 32 bits, only allows for 1 MB of RAM use, and is extremely rudementary, and is wildly unsafe by nature of not having a buffer between the programs being run and the physical hardware. 
+Fortunely, we will likely not stay there long, as most BIOSes next step is to move into the next mode, protected mode.
+
+What is paging?
+When a computer is up and running, it uses memory. RAM, random access memory, is the main used resource of a computer; it can be thought of as empty desk space to work on.
+But how is it managed? When a program starts, it needs to be allocated some memory to use, and when it ends it needs to clean up behind itself. How is that all organized, particularly in parallel?
+The answer is paging, a memory management model that allows for memory to be allocated and deallocated on the fly. As a note- it requires 32 bits, so you need to be in protected mode to run it.
