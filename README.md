@@ -28,3 +28,4 @@ Because it is my capstone, I will be writing it in my preferred language, Rust. 
 ## Sources
 1. [OS Dev Wiki](https://wiki.osdev.org/Main_Page)
 2. [Pillipp Opperman's "Writing an OS in Rust" Blog](https://os.phil-opp.com/) 
+3. [Casey Cole's OS Series](https://www.youtube.com/watch?v=dFrDy8910j8&list=PLWCT05ePsnGww5psXWHRLG7p30eKKt1Pd)

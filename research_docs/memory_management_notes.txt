@@ -6,11 +6,36 @@ fixed size issues:
   - the sizes are not dynamic
   - if for example you had a process that requires 3kb but only a 16kb block is open, then you have 13kb unused, unusable RAM
   - this unused memory is called internal fragmentation. it's allocated but unused space
-  - 
+  - easy to impliment, but sets a hard limit on process size
 
 variable size issues: 
   - pro: no internal fragmentation => no lost memory
   - however it can have external fragmentation, where if a block uses 2kb, and another uses 8kb, then if the 2kb is freed but a 4kb program comes in, it can't fit in the 2kb hole, thus causing external fragmentation. 
   - external fragmentation is square peg round hole situation. which is a problem, debatably more insidious
+  - harder to impliment but less restrictions on # of processes
 
-using Casey Cole's OS video series
+3 main algorithms for allocating processes:
+  - first fit: first one that fits, it sits, causes a lot of internal fragmentation
+  - best fit: smallest partition that fits, it sits. Have to look through the entire system, which can take longer
+  - worst fit: biggest partition that fits, it sits. Also looks through everything, but sucks
+
+Memory compaction:
+  - Collapses space, removing external fragmentation, which means that worst fit can actually not be too bad
+  - requires repartitioning fixed size allocations
+
+
+
+PAGING
+  - the idea is taking virtual memory (addresses that the cpu sees) and dividing it up into pages 
+  divide physical ram into frames, usually page size = frame size.
+  Now you can have a program that uses pages 1 and 2, and those pages can be in physical memory space 0x00 and 0xff without issue
+  - frame size is a power of 2, between 512b and 16MB (16*10^6 bytes)
+  - there are two types of addressses to care about, logical address and physical address.
+  - both address types are made of the same stuff, the page/frame number and offset. Page/frame number is the overall location in memory, and is used to match pages to frames using the Frame Table. Is a more specific address, letting you look to an exact point in the frame/page.
+  - for example, you have a logical memory block of 4 pages (0, 1, 2, 3, 4), a page table of (0:1, 1:4, 2:3, 3:7), and a physical memory of 8 entries (0, 1, ... 6, 7)
+    if you wanted to find the actual memory in page [1], you'd go and look in the page table, find that (1:4), then look at frame [4].
+  - second example, if you have the same setup as before. If you have page 3 containing [a, b, c, d] and want to find [3][b] in the frames, you look at the frame table, see that 3:7, so look at the address (7, 1), because b has an offset of 1 from the start of the frame
+  - note: frame numbers are lablled contigously, so there is another layer of translation. Meaning that if you have 4 bit frames, the first frame is frame 0, containing (0, 1, 2, 3), and the second is frame 4, containing (4, 5, 6, 7), etc
+  - the cpu does not necessarily produce proper paging addresses, it might (will) produce a sinigle memory pointer, and you have to translate it into a pager pointer.
+    - for example, using the 4-bit example of before, an address of 6 would be the second item in the second frame, so your paging address would be page 1 offset 1.
+    then, if the frame number happens to be 3, then 3*4+1=13, so the address in physical memory is 13. 
