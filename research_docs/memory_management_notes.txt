@@ -39,3 +39,19 @@ PAGING
   - the cpu does not necessarily produce proper paging addresses, it might (will) produce a sinigle memory pointer, and you have to translate it into a pager pointer.
     - for example, using the 4-bit example of before, an address of 6 would be the second item in the second frame, so your paging address would be page 1 offset 1.
     then, if the frame number happens to be 3, then 3*4+1=13, so the address in physical memory is 13. 
+  - example problem. 64bit machine w/16TB RAM, using 4KB page size 
+    - how many memory frames does the machine have. 1TB=2^40*16=2^40*2^4=2^44. Page size (is the same as frame size) is 4kb = 2^10*2^2=2^12, so now you chunk out the total ram into frame sized chunks, so the number of memory frames=total ram/frame size => 2^44/2^12=2^(44-12)=2^(32), so there are 2^32 frames
+    - how many bits are needed for displacement? This is just the length of the page size, so 2^12 means you need 12 bits for a 4kb page size
+  - how does paging help contiguous memory allocation?
+    - firstly, it's literally not contiguous, it doesn't require memory chunks to go in a nice line
+    - as a result of ^, there is no external fragmentation (there could be potential?? but unlikely??)
+    - and as a byproduct, so long as frame size is small enough, there also isn't -much- internal fragmentation
+  - problem: a page table can end up massive, if you have enough onboard RAM, and it's wasted space. Therefore, the solution is multi-level paging
+
+MULTI-LEVEL PAGING
+  - problem: pages can take up a ton of space
+  - the old workflow, single frame, was logical space -> page table -> physical ram
+  - solution is multi level paging, having multi level paging
+  - instead of [Page, Offset], it becomes [Page1, Page2, Pagen, offset].
+  - first one indexes into a outer page table, second page # indexes into a second table, etc
+  - the page number is split in half, size wise, so if with a single 
