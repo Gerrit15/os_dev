@@ -8,3 +8,46 @@ Of course, when building an OS, there's no guarantee that any of these services 
 
 As a result, our binary is MUCH smaller, and we cannot use many of the usual features of the language.
 But as an upside, it can run without an intervening operating system.
+
+The rust perspective: 
+  (code as per os.phil-opp.com)
+  example src/main.rs:
+    #![no_std] // don't link the Rust standard library
+    #![no_main] // disable all Rust-level entry points
+    use core::panic::PanicInfo;
+
+    #[no_mangle] // don't mangle the name of this function
+    pub extern "C" fn _start() -> ! {
+        // this function is the entry point, since the linker looks for a function
+        // named `_start` by default
+        loop {}
+    }
+
+    /// This function is called on panic.
+    #[panic_handler]
+    fn panic(_info: &PanicInfo) -> ! {
+        loop {}
+    }
+
+  example Cargo.toml:
+    [package]
+    name = "crate_name"
+    version = "0.1.0"
+    authors = ["Author Name <author@example.com>"]
+
+    # the profile used for `cargo build`
+    [profile.dev]
+    panic = "abort" # disable stack unwinding on panic
+
+    # the profile used for `cargo build --release`
+    [profile.release]
+    panic = "abort" # disable stack unwinding on panic
+
+
+  - we remove the standard library with the no_std, as discussed
+  - we remove the main function, because while in most projects/languages your entrypoint is named main(), there is technically something that comes first. 
+  Usually it's called something like "start" or "_start", and exists as a kind of bootloader/bios for the program, setting up the environment.
+  In the case of Rust, it's built alongside the C language and as a result uses C's 'runtime zero', which uses "start" as it's entry, which we override with our own start()
+  - Before discussing the panic() function, let's dicuss the lack of stack unwinding. Stack unwinding is great, it makes sure that a program cleans up after itself, even if it falls apart. Unfortunely, just like the Vec<>, it requires some OS Specific things that we do not have. Therefore, on panic (rust's version of error/crash [kind of]) it simply all falls apart.
+  This is kinda concerning, but since if the OS crashes there's not much one can do about it, it's not the biggest concern.
+  - However without the standard library, and without stack unwinding, we need our own panic function. So we tell the compiler to go here and just loop if there's a panic.
