@@ -54,4 +54,10 @@ MULTI-LEVEL PAGING
   - solution is multi level paging, having multi level paging
   - instead of [Page, Offset], it becomes [Page1, Page2, Pagen, offset].
   - first one indexes into a outer page table, second page # indexes into a second table, etc
-  - the page number is split in half, size wise, so if with a single 
+  - the page number is split in half, size wise, so if with a single page setup had a 4bit number, a two page setup would have two 2bit numbers
+  - How does this save memory?
+    - for example, a 4 bit single page table setup will have a maximum of 2^4, or 16 entries. 
+    However, a 4 bit length two page table setup will have 2^2 and 2^2, so the outer page table will have 4 entries, and the inner will have also 4 entries.
+    This looks like it's more space used, the two page setup will have 16+4 (16 actual entries and 4 directing entries), so space is lost?
+    The space saving comes in because there's spaces in memory that does not need to be directed to, such as the space where the table exists, so that entry can get pruned.
+    - This pruning can allow for saved space, because it's a lot easier to chop off bits and pieces.
