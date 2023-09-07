@@ -3,7 +3,7 @@ When you program in any language, you have a massive library of functions and ob
 Many of these are extremely useful, and this library is called the Standard Library. 
 For example, in Rustlang, the standard library provides an extremely useful data structure called a Vec<>.
 A Vec is a vector, a list of data, that is completely resizable. 
-The reason why it's not part of the base library is it is built on top of the rest of Rust, using useful OS provided systems like the Heap.
+The reason why it's not part of the base library is it is built on top of the rest of Rust, using useful OS provided systems like the Heap. aaaa test
 Of course, when building an OS, there's no guarantee that any of these services will be available. Therefore, when writing to an embedded device or a system without an OS (which for all intents and purposes is a embedded device), we omit the standard library from our program.
 
 As a result, our binary is MUCH smaller, and we cannot use many of the usual features of the language.
