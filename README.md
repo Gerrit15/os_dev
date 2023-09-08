@@ -3,19 +3,20 @@ This is my senior capstone, I will be researching how a basic operating system w
 Because it is my capstone, I will be writing it in my preferred language, Rust. That being said, most traditional operating systems are built for C or in *fancier cases* C++
 
 ## Goals
-- [ ] Understand the purpose of an operating system.
-    - [ ] What is BIOS
-    - [ ] What is system management
-    - [ ] What is paging
-    - [ ] Users vs Hardware
+- [ ] Understand the basic purpose of an operating system.
+    - [x] What is BIOS
+    - [x] What is system management
+    - [x] What is paging
+    - [x] Users vs Hardware
+    - [ ] How does the PCI bus function
 - [ ] Create a minimum Viable OS 
     - [ ] Create a BIOS based bootloader
     - [ ] Impliment text mode
     - [ ] Impliment Paging
     - [ ] Real mode/barebones
 - [ ] Stretch goals
-    - [ ] User interaction
-    - [ ] File system reader
+    - [ ] User interaction, such as keyboard
+    - [ ] PCI bus interaction
     - [ ] User executable programs, similar to `cat` and `ls`
     - [ ] protected mode (very well impossible)
 
