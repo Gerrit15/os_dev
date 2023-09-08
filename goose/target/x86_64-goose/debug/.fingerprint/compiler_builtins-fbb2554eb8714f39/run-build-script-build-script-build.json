@@ -1,0 +1,1 @@
+{"rustc":1284733746247511947,"features":"","target":0,"profile":0,"path":0,"deps":[[12189856535061137466,"build_script_build",false,383157033197413091]],"local":[{"RerunIfChanged":{"output":"x86_64-goose/debug/build/compiler_builtins-fbb2554eb8714f39/output","paths":["build.rs"]}}],"rustflags":[],"metadata":0,"config":0,"compile_kind":0}
