@@ -1,0 +1,16 @@
+VGA text mode
+
+  - Video Graphics Array Text Mode is a way to print text to screen for PS/2 Connectors
+  - is technically outdated, but QEMU, the emulator used, doesn't care much about that
+  - VGA text buffer is a 2d array of 25 rows and 80 collumns, redenered directly to screen
+  - each entry/character is a 16 bit value
+    - the first 8 values, 0-7, is the ASCII code point (to be specific it's actually something called code page 437 but it's mostly the same)
+    - the next 4 values, 8-11, is the forground color
+    - the next 4 values, 12-14, is the background color
+    - the final bit, 15, is whether or not to blink
+    - colors is weird, refer to https://os.phil-opp.com/vga-text-mode/ for a table of colors
+  - VGA buffer is in the address 0xb8000, so you write your sixteen bits there
+
+  - a nifty way to get a proper color is to take the background as a u8, shift that 4 bits left, then OR that with the foreground 
+  - be careful, ASCII is NOT UTF-8, and thus a lot of characters cannot be used
+
