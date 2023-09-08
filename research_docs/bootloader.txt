@@ -1,0 +1,17 @@
+Bootloader
+
+What does a bootloader do?
+A bootloader's purpose is to prepare the system for the rest of execution.
+For example, modern bootloaders are UEFI and launch computers from 16-bit real mode into 64-bit long mode.
+Basic bootloaders, BIOS ones (which are a more archaic form of modern UEFI loaders) were designed for floppies, and so the first thing that is looked for is the first 512 bytes of an executable to launch from.
+This 512 bytes is the bootloader, and ends with the bytes 55, and then aa. Fortunely, we can avoid this issue by writing more high level code.
+
+That being said, if you really wanted you could use this asm, and it would boot baremetal:
+
+jmp $
+times 510-($-$$) db 0
+db 0x55, 0xaa
+
+
+Bootloaders kind of suck, and can have a lot of little "magic bytes" like 0x55 and 0xaa, due to the inherent obscurity of a CPU.
+As a result, instead
