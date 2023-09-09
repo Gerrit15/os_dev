@@ -8,23 +8,24 @@ Because it is my capstone, I will be writing it in my preferred language, Rust. 
     - [x] What is system management
     - [x] What is paging
     - [x] Users vs Hardware
+    - [ ] Understand text mode
     - [ ] How does the PCI bus function
 - [ ] Create a minimum Viable OS 
     - [ ] Create a BIOS based bootloader
-    - [ ] Impliment text mode
+    - [ ] Impliment text mode (up to and including beyond our real mode setup)
     - [ ] Impliment Paging
     - [ ] Real mode/barebones
 - [ ] Stretch goals
     - [ ] User interaction, such as keyboard
     - [ ] PCI bus interaction
     - [ ] User executable programs, similar to `cat` and `ls`
-    - [ ] protected mode (very well impossible)
 
 ## notes
 - minimum viable means that is executable, and reaches protected mode
 - outline can and will change as more research is done
 - as there are not that many resources, there might not be that many sources
 - Operating systems exist in a very nebulous space, and as such definitions can be wobbly. Everything here is human defined
+- Currently, to expedite things, I'm using a tool to build a bootloader around 
 
 ## Sources
 1. [OS Dev Wiki](https://wiki.osdev.org/Main_Page)
