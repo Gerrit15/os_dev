@@ -21,6 +21,7 @@ Because it is my capstone, I will be writing it in my preferred language, Rust. 
     - [ ] PCI bus interaction, and i2c for RAM
     - [ ] User executable programs, similar to `cat` and `ls`
     - [ ] Multi-level paging
+    - [ ] Minesweeper a-la JDH (my biggest wish for this project)
 
 ## notes
 - minimum viable means that is executable, and reaches protected mode

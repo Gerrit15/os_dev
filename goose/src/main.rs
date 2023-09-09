@@ -1,17 +1,19 @@
 #![no_std]
 #![no_main]
 use core::panic::PanicInfo;
+//use core::fmt::Write;
 mod vga_buffer;
-
-static HELLO: &[u8] = b"Hello, World!";
+//use vga_buffer::WRITER;
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    vga_buffer::print_something();
+    println!("Hello, World!");
     loop {}
 }
 
 #[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
+fn panic(info: &PanicInfo) -> ! {
+    print!("{}", info);
     loop {}
 }
+
