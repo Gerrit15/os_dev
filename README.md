@@ -10,15 +10,17 @@ Because it is my capstone, I will be writing it in my preferred language, Rust. 
     - [x] Users vs Hardware
     - [ ] Understand text mode
     - [ ] How does the PCI bus function
+    - [ ] Make a bootloader that can at least link Rust (does not have to connect to the rest of OS project)
 - [ ] Create a minimum Viable OS 
-    - [ ] Create a BIOS based bootloader
+    - [ ] Create a BIOS based Kernal
     - [ ] Impliment text mode (up to and including beyond our real mode setup)
     - [ ] Impliment Paging
     - [ ] Real mode/barebones
 - [ ] Stretch goals
     - [ ] User interaction, such as keyboard
-    - [ ] PCI bus interaction
+    - [ ] PCI bus interaction, and i2c for RAM
     - [ ] User executable programs, similar to `cat` and `ls`
+    - [ ] Multi-level paging
 
 ## notes
 - minimum viable means that is executable, and reaches protected mode
