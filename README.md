@@ -8,7 +8,9 @@ Because it is my capstone, I will be writing it in my preferred language, Rust. 
     - [x] What is system management
     - [x] What is paging
     - [x] Users vs Hardware
-    - [ ] Understand text mode
+    - [x] Understand text mode
+    - [ ] CPU Exceptions/interrupts
+    - [ ] In kernal testing? (potentially optional, remains to be seen)
     - [ ] How does the PCI bus function
     - [ ] Make a bootloader that can at least link Rust (does not have to connect to the rest of OS project)
 - [ ] Create a minimum Viable OS 
