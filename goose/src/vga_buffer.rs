@@ -29,6 +29,7 @@ lazy_static! {
     pub static ref WRITER: Mutex<Writer> = Mutex::new(Writer {
         column_position: 0,
         color_code: ColorCode::new(Color::Magenta, Color::Black),
+        //basically this entry is a direct hole into memory that we write to
         buffer: unsafe { &mut *(0xb8000 as *mut Buffer)}
     });
 }

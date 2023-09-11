@@ -7,7 +7,7 @@ mod vga_buffer;
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    println!("Hello, World!");
+    println!("Hello, world!");
     loop {}
 }
 
@@ -16,4 +16,3 @@ fn panic(info: &PanicInfo) -> ! {
     print!("{}", info);
     loop {}
 }
-
