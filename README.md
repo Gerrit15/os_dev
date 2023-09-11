@@ -36,3 +36,5 @@ Because it is my capstone, I will be writing it in my preferred language, Rust. 
 1. [OS Dev Wiki](https://wiki.osdev.org/Main_Page)
 2. [Pillipp Opperman's "Writing an OS in Rust" Blog](https://os.phil-opp.com/) 
 3. [Casey Cole's OS Series](https://www.youtube.com/watch?v=dFrDy8910j8&list=PLWCT05ePsnGww5psXWHRLG7p30eKKt1Pd)
+4. [Daedalus Community's series](https://www.youtube.com/watch?v=MwPjvJ9ulSc&list=PLm3B56ql_akNcvH8vvJRYOc7TbYhRs19M&index=1)
+5. [Writing a simple operating syste -- from scratch, by Nick Blundell](https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf)

@@ -12,4 +12,13 @@ it moves 10 into register ax
 registers ax ab cx and dx are 16 bit, divided into two 8bit parts, h and l
 for example ax has ah and al
 
-alongide being 512 bits, it also is terminated with the bits 0x55aa
+alongide being 512 bits, it also is terminated with the bits 55, aa
+
+so a basic boot sector is 
+  e9 fd ff 00 00 00 * 00 00 55 aa
+e9 fd ff is an endless loop, and we already know what 55 aa does
+
+That being said, if you want to define 55, aa as a "word" of bytes
+you'd want to define it as 0xaa55 due to endingness, where this is little-endian
+
+(ended on page 11, 3.3.1 interrupts)
