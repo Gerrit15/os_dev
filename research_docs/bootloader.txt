@@ -1,4 +1,4 @@
-Bootloader
+Bootloader ans ASM
 
 Bootloaders are in assembly, and set up the computer with magic bits and bytes for the kernal
 A bootloader is the first 512 bytes of a hard drive, which presents a unique task
@@ -21,4 +21,28 @@ e9 fd ff is an endless loop, and we already know what 55 aa does
 That being said, if you want to define 55, aa as a "word" of bytes
 you'd want to define it as 0xaa55 due to endingness, where this is little-endian
 
-(ended on page 11, 3.3.1 interrupts)
+Interrupts: makes the cpu stop whatever it's doing, and do something, like print to the screen
+    - for example, moving 0x0e into ah, and a character into al, then calling "int 0x10" will cause whatever's in al to get printed to the screen
+
+usually BIOS loads boot sector at address 0x7c00, however it's not always. 
+This can cause a problem, because a label in a program might not be aware of that, and thus jumping to a label that's basically a raw pointer
+As a result, we start of programs with [org 0x7c00]
+
+Strings:
+  db 'make sur they're null terminated', 0
+
+Stack:
+  - a first in first out data structure with two commands: push and pop
+  - is maintained by two special cpu registers, bp and sp, which is the stack base and stack top respectively.
+  - because the stack grows like a tower, it is usually put far away from important regions of memory
+  - note that the stack grows DOWNWARDS from bp, so as something gets pushed, it's stored below bp and sp is decrimented by the value's size
+  - impliments two really useful commands called pusha and popa that push and pop all registers, allowing to put things aside for a function call
+
+Conditional jumps/program flow
+  - cmp [register], [value]
+  - je [label]
+    - je: y == x, jne: y != x, jl: y < x, jle: y <= x, jg: y > x, jge: y >= xb
+
+ret instruction is cool, it lets you return from were you jumped from by saying "call" instead of jump
+you can do `%include "function.asm"` and that line will get replaced by the contents of that file
+
