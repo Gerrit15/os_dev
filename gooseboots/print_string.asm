@@ -1,4 +1,5 @@
 print_string:
+  pusha
   mov ah, 0x0e
   print_cont:
     mov al, [bx]
@@ -8,4 +9,5 @@ print_string:
     inc bx
     jmp print_cont
   print_end:
+    popa
     ret
