@@ -1,0 +1,20 @@
+Segmentation is a memory management technique for real mode similar to how protected mode uses paging
+
+in real mode you use a logical address in the form of a:B to address memory, translated into a physical address using this equation:
+  Physical addresss = (A * 0x10) + B
+
+Registers in real mode are limited to 16 bits for addressing, so between 0 and 64k. 
+Therefore, A is set to a fixed value and B can be changed, so A represents what segment is being used, and B represents the offset.
+
+For example, if you wanted to access a second segment, you'd address (1*16) + B
+There is clearly some overlap, and this is similar to have a lot of small pages in paging, so that you can prevent external fragmentation
+
+There are six segment registers, CS, DS, SS, ES, FS, GS.
+CS is code segment, DS is data segment, SS is stack segment, ES is extra segment, FS and GS are general purpose
+Often the segment register is not being contained in the instruction, but there is one being used every time you use an instruction
+
+
+For example, 
+
+This is a useful technique for many reasons, primarily because it allows us to jump the gap between our 512 bytes and into the land of however big we want (within reason)
+But more then that, it can be used to read more of the disk then was previously available to us
