@@ -1,25 +1,28 @@
 [bits 32]
-
-; some consts
+;consts
 VIDEO_MEMORY equ 0xb8000
 WHITE_ON_BLACK equ 0x0f
 
-; prints a null terminated string into edx
 print_string_pm:
   pusha
-  mov edx, VIDEO_MEMORY ; sets edx to start of vid memory
+  ;make edx a pointer to vga text buffer
+  mov edx, VIDEO_MEMORY
 
 print_string_pm_loop:
-  mov al, [ebx]             ; put the character in ebx in al
-  mov ah, WHITE_ON_BLACK    ; put a color in ah
+  ; store character in ah
+  mov al, [ebx]
+  ; store color in al
+  mov ah, WHITE_ON_BLACK
 
-  cmp al, 0                 ; null terminated and all that
+  ; null terminated things
+  cmp al, 0
   je print_string_pm_done
 
-  move [edx], ax            ; otherwise print to current position
+  ; send colored characters to screen
+  mov [edx], ax
 
-  add ebx, 1                ; next character
-  add ebx, 2                ; next cell (each cell is color and character)
+  add ebx, 1    ; incriment string pointer
+  add edx, 2    ; incriment vga pointer by two because cells are color and text
 
   jmp print_string_pm_loop
 

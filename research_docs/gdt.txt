@@ -1,0 +1,42 @@
+Protected is a 32 bit mode, allowing accessing up to 4GB, and allows for higher level languages
+Segmentation doesn't work the same however, so it's neccissary to use a GDT, also known as Global Discriptor Table
+
+GDT is a mess
+
+Discriptor is a list of properties for a given segment
+  - Base: 32bit for start
+  - Limit: 20 bit for max size (0xfffff)
+  - Present: single bit flag if it's used
+  - Privilege: 2 bit number for, well, privilege
+  - Type: single bit if segment is code or data
+  
+  - Flags for code:
+    - Type flags
+      - is code?
+      - conforming? (can be executed from lower privilege segments?)
+      - readable?
+      - accessed? (managed by cpu, let the cpu do it's thing)
+    - other flags
+      - Granularity? (if set high, limit is multiplied by 0x1000)
+      - Uses 32 bits memory?
+      - Uses 64 bits memory?
+      - AVL (available, for whatever you want)
+
+  - Flags for Data
+    - conforming --> direction? (if on, it expands down)
+    - readable --> writable?
+
+
+Segmentation, GDT, why they're important
+
+If you wanted to do:
+mov [0x4f356], ax
+you'd be out of luck, because that's larger then the allowed address provided by 16 bits
+=> you have to use segment registers like so:
+mov bx, 0x4000
+mov es, bx
+mov [es:0xfe56], ax
+and then you're happy
+
+This was dandy for 16 bit mode, but protected mode is nothing if not protected, and a mode
+To assist in this protection, the way that it translates logical addresses to physical addresses is completely different
