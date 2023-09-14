@@ -14,11 +14,12 @@ Because it is my capstone, I will be writing it in my preferred language, Rust. 
     - [ ] How does the PCI bus function
     - [ ] Make a bootloader that can at least link Rust (does not have to connect to the rest of OS project)
 - [ ] Create a minimum Viable OS 
-    - [ ] Create a BIOS based Kernal
-    - [ ] Impliment text mode (up to and including beyond our real mode setup)
+    - [x] Create a BIOS based Kernal
+    - [x] Impliment text mode (up to and including beyond our real mode setup)
     - [ ] Impliment Paging
     - [ ] Real mode/barebones
 - [ ] Stretch goals
+    - [ ] Drawing to screen
     - [ ] User interaction, such as keyboard
     - [ ] PCI bus interaction, and i2c for RAM
     - [ ] User executable programs, similar to `cat` and `ls`
@@ -30,7 +31,6 @@ Because it is my capstone, I will be writing it in my preferred language, Rust. 
 - outline can and will change as more research is done
 - as there are not that many resources, there might not be that many sources
 - Operating systems exist in a very nebulous space, and as such definitions can be wobbly. Everything here is human defined
-- Currently, to expedite things, I'm using a tool to build a bootloader around the kernal, but I would like to make a basic bootloader at some point
 
 ## Sources
 1. [OS Dev Wiki](https://wiki.osdev.org/Main_Page)

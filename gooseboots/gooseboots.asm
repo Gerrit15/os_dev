@@ -10,11 +10,11 @@ mov bx, String1
 call print_string
 
 mov bx, 0x9000           ; load 5 sectors to 0x0000(ES):0x9000(BX)
-mov dh, 5               ; from boot disk (dl)
+mov dh, 5                ; from boot disk (dl)
 mov dl, [BOOT_DRIVE]
 call disk_load
 
-mov dx, [0x9000 + 512]
+mov dx, [0x9000 + 512]  ; a test, to see if we can make it access from beyond the 512 byte barrier
 call print_hex
 
 end:
@@ -25,7 +25,8 @@ end:
 %include "disk_load.asm"
 
 String1:
-  db "Attempting a load from disk!    ", 0
+  ; 0xa is newline, 0xd is carriage return
+  db "Attempting a load from disk!", 0xa, 0xd, 0
 
 ; global variable
 BOOT_DRIVE: db 0
