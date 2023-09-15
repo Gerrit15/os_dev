@@ -1,38 +1,59 @@
-; for data sector, allows for proper offset
 [org 0x7c00]
+mov bp, 0x9000
+mov sp, bp
 
-mov [BOOT_DRIVE], dl ; stores boot drive in dl, let's remember this for later
+mov bx, MSG_REAL_MODE
+call print_string_rm
 
-mov bp, 0x8000 ; set up stack just a little below the bootloader
-mov sp, bp     ; stack pointer and base pointer
+call switch_to_pm
 
-mov bx, String1
-call print_string
+jmp $
 
-mov bx, 0x9000           ; load 5 sectors to 0x0000(ES):0x9000(BX)
-mov dh, 5                ; from boot disk (dl)
-mov dl, [BOOT_DRIVE]
-call disk_load
+%include "print_string_rm.asm"
+%include "print_string.asm"
+%include "gdt.asm"
+%include "switch_to_pm.asm"
 
-mov dx, [0x9000 + 512]  ; a test, to see if we can make it access from beyond the 512 byte barrier
-call print_hex
+[bits 32]
+BEGIN_PM:
+  mov ebx, MSG_PROT_MODE
+  call print_string_pm
 
 end:
   jmp $
 
-%include "print_string.asm"
-%include "print_hex.asm"
-%include "disk_load.asm"
-
-String1:
-  ; 0xa is newline, 0xd is carriage return
-  db "Attempting a load from disk!", 0xa, 0xd, 0
-
-; global variable
-BOOT_DRIVE: db 0
+MSG_REAL_MODE:
+  db "Started in 16-bit Real Mode", 0
+MSG_PROT_MODE:
+  db "Reached 32-bit Protected Mode", 0
 
 times 510-($-$$) db 0
 dw 0xaa55
 
-times 256 dw 0
-times 256 dw 0xface
+;mov bx, MSG_REAL_MODE
+;call print_string_rm
+
+;call switch_to_pm
+
+;jmp $
+
+;%include "print_string.asm"
+;%include "print_string_rm.asm"
+;%include "disk_load.asm"
+;%include "gdt.asm"
+;%include "switch_to_pm.asm"
+
+;[bits 32]
+
+;BEGIN_PM:
+;  mov ebx, MSG_PROT_MODE
+;  call print_string_pm
+
+;end:
+;  jmp $
+
+;MSG_REAL_MODE: db "Started in 16-bit Real Mode", 0
+;MSG_PROT_MODE: db "Successfullly landed in 32-bit Protected mode", 0
+
+;times 510-($-$$) db 0
+;dw 0xaa55
