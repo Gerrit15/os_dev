@@ -1,0 +1,1 @@
+Long mode is 64 bit mode, it's what you need to clamber into to load Rust (or C)
