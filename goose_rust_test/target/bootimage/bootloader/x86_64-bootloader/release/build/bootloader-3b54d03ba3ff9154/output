@@ -1,0 +1,7 @@
+cargo:rerun-if-changed=/home/gerrit/projects/os_dev/goose/Cargo.toml
+cargo:rustc-link-search=native=/home/gerrit/projects/os_dev/goose/target/bootimage/bootloader/x86_64-bootloader/release/build/bootloader-3b54d03ba3ff9154/out
+cargo:rustc-link-lib=static=kernel_bin-goose
+cargo:rerun-if-env-changed=KERNEL
+cargo:rerun-if-env-changed=KERNEL_MANIFEST
+cargo:rerun-if-changed=/home/gerrit/projects/os_dev/goose/target/x86_64-goose/debug/goose
+cargo:rerun-if-changed=build.rs
