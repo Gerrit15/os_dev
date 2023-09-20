@@ -1,1 +1,30 @@
 Long mode is 64 bit mode, it's what you need to clamber into to load Rust (or C)
+
+Long mode paging is a 4 table depth
+an entry is 52-bit physical memory, with additional bits that be OR-ed in:
+
+0 - present, it's currently in memory
+1 - writable, it's allowed to write to this page
+2 - user accessible, if not set, only the kernal can use this page
+3 - write through caching
+4 - disable cache
+5 - accessed, cpu set bit for when the page is in use
+6 - dirty, cpu set bit for when a write occurs
+7 - huge page/null, must be nnull in p1 and p4, creates 1gib for p3, creates a 2mib in p2
+8 - global, page isn't flushed from cache on address space switch
+9-11 - available for os
+52-62 - availabe for os
+63 - no execute, forbit code from executing on this page
+
+
+Long mode also has GDT, here's the bits:
+0-41 - ignored
+42 - conforming, current privialge level can be higher than the specified level for code segments
+43 - executable, if set it's code, otherwise it's data
+44 - descriptor type, should be 1 for data and code
+45-46 - privialge, ring level, 0 for kernal, 3 for user
+47 - present, must be 1 for valid selectors
+48-52 - ignored in long mode
+53 - 64bit, should be set
+54 - 32bit, should not be set
+55-63 - ignored
