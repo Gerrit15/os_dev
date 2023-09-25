@@ -1,18 +1,27 @@
+global start
+section .text
+start:
 ;[org 0x7c00]
 mov bp, 0x9000
 mov sp, bp
-call switch_to_pm
+;call switch_to_pm
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; FOR VIEWERS:
+; I am stopping here, trying to make sure I can boot with a basic linker
+; as of now, I can't get qemu to accept my linked binary
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+hlt
 jmp $
 ; just load beyond the bootloader here, stupid
 
 %include "./asm_funcs/gdt.asm"
 %include "./asm_funcs/switch_to_pm.asm"
-%include "./asm_funcs/disk_load.asm"
-%include "./asm_funcs/print_string_rm.asm"
+;%include "./asm_funcs/disk_load.asm"
+;%include "./asm_funcs/print_string_rm.asm"
 
-load_kernal:
-  mov bx, 0x1000
+;load_kernal:
+;  mov bx, 0x1000
 
 [bits 32]
 BEGIN_PM:
@@ -50,12 +59,11 @@ Realm64:
   mov fs, ax
   mov gs, ax
   mov ss, ax
-;  mov edi, 0xB8000
-;  mov rax, 0x1F201F201F201F20
+  mov edi, 0xB8000
+  mov rax, 0x1F201F201F201F20
   mov ecx, 500
   rep stosq
-  [extern main]
-  call main
+  ; I would like to link rust here
   jmp $
 
 times 510-($-$$) db 0
