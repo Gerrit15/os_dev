@@ -1,12 +1,18 @@
-[org 0x7c00]
-mov bp, 0x8000
+;[org 0x7c00]
+mov bp, 0x9000
 mov sp, bp
 call switch_to_pm
+
 jmp $
 ; just load beyond the bootloader here, stupid
 
 %include "./asm_funcs/gdt.asm"
 %include "./asm_funcs/switch_to_pm.asm"
+%include "./asm_funcs/disk_load.asm"
+%include "./asm_funcs/print_string_rm.asm"
+
+load_kernal:
+  mov bx, 0x1000
 
 [bits 32]
 BEGIN_PM:
@@ -34,9 +40,6 @@ error:
 %include "./asm_funcs/check_long_mode.asm"
 %include "./asm_funcs/longmode_prep.asm"
 %include "./asm_funcs/longmode_gdt.asm"
-jmp error
-times 510-($-$$) db 0
-dw 0xaa55
 
 [bits 64]
 Realm64:
@@ -47,10 +50,14 @@ Realm64:
   mov fs, ax
   mov gs, ax
   mov ss, ax
-  mov edi, 0xB8000
-  mov rax, 0x1F201F201F201F20
+;  mov edi, 0xB8000
+;  mov rax, 0x1F201F201F201F20
   mov ecx, 500
   rep stosq
+  [extern main]
+  call main
   jmp $
 
+times 510-($-$$) db 0
+dw 0xaa55
 
