@@ -12,7 +12,6 @@ jmp $
 
 [bits 32]
 BEGIN_PM:
-jmp $
 call check_cpuid
 call check_long_mode
 
