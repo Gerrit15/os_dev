@@ -1,35 +1,21 @@
-global start
+global _start
 section .text
-start:
+_start:
 ;[org 0x7c00]
 mov bp, 0x9000
 mov sp, bp
-;call switch_to_pm
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; FOR VIEWERS:
-; I am stopping here, trying to make sure I can boot with a basic linker
-; as of now, I can't get qemu to accept my linked binary
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-hlt
+call switch_to_pm
 jmp $
-; just load beyond the bootloader here, stupid
 
 %include "./asm_funcs/gdt.asm"
 %include "./asm_funcs/switch_to_pm.asm"
-;%include "./asm_funcs/disk_load.asm"
-;%include "./asm_funcs/print_string_rm.asm"
-
-;load_kernal:
-;  mov bx, 0x1000
 
 [bits 32]
 BEGIN_PM:
-; continue here, if you wish
+jmp $
 call check_cpuid
 call check_long_mode
 
-; thus begins long mode entry (hopefully)
 call longmode_prep
 lgdt [GDT.Pointer]
 jmp GDT.Code:Realm64
@@ -68,4 +54,3 @@ Realm64:
 
 times 510-($-$$) db 0
 dw 0xaa55
-
