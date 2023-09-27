@@ -1,0 +1,12 @@
+[package]
+name = "Goose"
+version = "0.1.0"
+authors = ["Gerrit R"]
+
+[dependencies]
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"

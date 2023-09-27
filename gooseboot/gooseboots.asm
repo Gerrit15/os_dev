@@ -49,6 +49,8 @@ Realm64:
   mov ecx, 500
   rep stosq
   ; I would like to link rust here
+  [extern rust_main]
+  call rust_main
   jmp $
 
 times 510-($-$$) db 0
