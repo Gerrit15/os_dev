@@ -42,13 +42,12 @@ Realm64:
   mov fs, ax
   mov gs, ax
   mov ss, ax
-  mov edi, 0xB8000
-  mov rax, 0x1F201F201F201F20
-  mov ecx, 500
-  rep stosq
-  ; I would like to link rust here
-;  [extern rust_main]
-;  call rust_main
+;  mov edi, 0xB8000
+;  mov rax, 0x1F201F201F201F20
+;  mov ecx, 500
+;  rep stosq
+  [extern _start]
+  call _start
   jmp $
 
 times 510-($-$$) db 0

@@ -8,6 +8,7 @@
 # and so it all runs, kinda cascadingly
 
 boot := gooseboots.asm
+kernel_rs := target/x86_64-goose/debug/Goose
 
 all: final
 
@@ -15,7 +16,7 @@ gooseboots.o:
 	@nasm ${boot} -f elf64 -o gooseboots.o
 
 goosekernel.bin: gooseboots.o Goose
-	@ld -o goosekernel.bin -Ttext 0x7c00 -e "_goose_start" gooseboots.o --oformat binary
+	@ld -o goosekernel.bin -Ttext 0x7c00 -e "_goose_start" gooseboots.o ${kernel_rs} --oformat binary
 	@rm gooseboots.o
 
 Goose: 
