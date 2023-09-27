@@ -1,7 +1,6 @@
 global _start
 section .text
 _start:
-;[org 0x7c00]
 mov bp, 0x9000
 mov sp, bp
 call switch_to_pm
