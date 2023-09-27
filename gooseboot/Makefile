@@ -15,7 +15,7 @@ gooseboots.o:
 	@nasm ${boot} -f elf64 -o gooseboots.o
 
 goosekernel.bin: gooseboots.o Goose
-	@ld -o goosekernel.bin -Ttext 0x7c00 gooseboots.o --oformat binary
+	@ld -o goosekernel.bin -Ttext 0x7c00 -e "_goose_start" gooseboots.o --oformat binary
 	@rm gooseboots.o
 
 Goose: 

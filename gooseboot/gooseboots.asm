@@ -1,10 +1,10 @@
-global _start
+global _goose_start
 section .text
-_start:
+_goose_start:
 mov bp, 0x9000
 mov sp, bp
 call switch_to_pm
-jmp $
+jmp end
 
 %include "./asm_funcs/gdt.asm"
 %include "./asm_funcs/switch_to_pm.asm"
@@ -17,7 +17,6 @@ call check_long_mode
 call longmode_prep
 lgdt [GDT.Pointer]
 jmp GDT.Code:Realm64
-
 
 end:
   jmp $
@@ -48,8 +47,8 @@ Realm64:
   mov ecx, 500
   rep stosq
   ; I would like to link rust here
-  [extern rust_main]
-  call rust_main
+;  [extern rust_main]
+;  call rust_main
   jmp $
 
 times 510-($-$$) db 0
