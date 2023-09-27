@@ -1,7 +1,7 @@
 ENTRY(start);
 
 SECTIONS {
-   .text {
-     *(.text)
+    . = 0x7c00;
+    .text: { *(.text) }
    }
 }
