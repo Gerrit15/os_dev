@@ -13,14 +13,14 @@ kernel_rs := target/x86_64-goose/debug/Goose
 all: final
 
 gooseboots.o:
-	@nasm ${boot} -f elf64 -o gooseboots.o
+	nasm ${boot} -f elf64 -o gooseboots.o
 
 goosekernel.bin: gooseboots.o Goose
-	@ld -o goosekernel.bin -Ttext 0x7c00 -e "_goose_start" gooseboots.o ${kernel_rs} --oformat binary
-	@rm gooseboots.o
+	ld -o goosekernel.bin -Ttext 0x7c00 -e "_goose_start" gooseboots.o ${kernel_rs} --oformat binary
+	rm gooseboots.o
 
 Goose: 
 	cargo build
 
 final: goosekernel.bin
-	@qemu-system-x86_64 -boot a -fda goosekernel.bin
+	qemu-system-x86_64 -boot a -fda goosekernel.bin

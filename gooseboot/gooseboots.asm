@@ -11,6 +11,9 @@ jmp end
 
 [bits 32]
 BEGIN_PM:
+[extern _start]
+call _start
+
 call check_cpuid
 call check_long_mode
 
@@ -42,10 +45,10 @@ Realm64:
   mov fs, ax
   mov gs, ax
   mov ss, ax
-;  mov edi, 0xB8000
-;  mov rax, 0x1F201F201F201F20
-;  mov ecx, 500
-;  rep stosq
+  mov edi, 0xB8000
+  mov rax, 0x1F201F201F201F20
+  mov ecx, 500
+  rep stosq
   [extern _start]
   call _start
   jmp $
