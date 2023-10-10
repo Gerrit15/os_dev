@@ -68,7 +68,6 @@ mov esp, ebp
 jmp $
 [extern _start]
 call _start
-jmp $
 
 times 510-($-$$) db 0
 dw 0xaa55
